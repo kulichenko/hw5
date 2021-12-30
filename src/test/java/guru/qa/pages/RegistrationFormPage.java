@@ -2,7 +2,6 @@ package guru.qa.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.DisplayName;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -45,49 +44,41 @@ public class RegistrationFormPage {
     private SelenideElement modalHeader = $(".modal-header");
     private ElementsCollection tableRows = $("tbody").$$("tr");
 
-    @DisplayName("Проверка загрузки страницы с формой регистрации ")
     public RegistrationFormPage checkThatPageIsLoaded() {
         formTitle.shouldHave(text("Student Registration Form"));
         return this;
     }
 
-    @DisplayName("Ввод имени")
     public RegistrationFormPage typeFirstName(String name) {
         firstNameInput.setValue(name);
         return this;
     }
 
-    @DisplayName("Ввод фамилии")
     public RegistrationFormPage typeLastName(String lastname) {
         lastNameInput.setValue(lastname);
         return this;
     }
 
-    @DisplayName("Ввод email")
     public RegistrationFormPage typeUserEmail(String email) {
         userEmail.setValue(email);
         return this;
     }
 
-    @DisplayName("Выбор мужского пола")
     public RegistrationFormPage setMaleRadio() {
         genderMaleRadio.click();
         return this;
     }
 
-    @DisplayName("Выбор женского пола")
     public RegistrationFormPage setFemaleRadio() {
         genderFemaleRadio.click();
         return this;
     }
 
-    @DisplayName("Ввод номера телефона")
     public RegistrationFormPage typeUserPhoneNo(String phoneNo) {
         userNumberInput.setValue(phoneNo);
         return this;
     }
 
-    @DisplayName("Ввод дня рождения")
     public RegistrationFormPage setBirthDate(String day, String month, String year) {
         dateOfBirthInput.click();
         monthSelect.selectOption(month);
@@ -96,7 +87,6 @@ public class RegistrationFormPage {
         return this;
     }
 
-    @DisplayName("Ввод предметов")
     public RegistrationFormPage setSubjects(String... subjects) {
         Arrays.stream(subjects).forEach(subject -> {
             subjectsInput.setValue(subject).pressEnter();
@@ -104,7 +94,6 @@ public class RegistrationFormPage {
         return this;
     }
 
-    @DisplayName("Выбор хобби")
     public RegistrationFormPage setHobbies(String... hobbies) {
         Arrays.stream(hobbies).forEach(hobby -> {
             $("#hobbiesWrapper").$(byText(hobby)).click();
@@ -112,39 +101,33 @@ public class RegistrationFormPage {
         return this;
     }
 
-    @DisplayName("Загрузка фото")
     public RegistrationFormPage uploadPicture(String path) {
         uploadPicture.uploadFromClasspath(path);
         return this;
     }
 
-    @DisplayName("Ввод адреса")
     public RegistrationFormPage typeAddress(String address) {
         currentAddressTextArea.setValue(address);
         return this;
     }
 
-    @DisplayName("Выбор штата")
     public RegistrationFormPage selectState(String stateName) {
         state.click();
         stateDropDownList.setValue(stateName).pressEnter();
         return this;
     }
 
-    @DisplayName("Выбор города")
     public RegistrationFormPage selectCity(String cityName) {
         city.click();
         cityDropDownList.setValue(cityName).pressEnter();
         return this;
     }
 
-    @DisplayName("Нажатие кнопки Submit")
     public RegistrationFormPage pushSubmitButton() {
         submitButton.click();
         return this;
     }
 
-    @DisplayName("Проверка данных после регистрации")
     public void checkResultSubmitting(Map<String, String> tableRowsValues) {
         modalHeader.shouldHave(text("Thanks for submitting the form"));
         checkTableValues(tableRowsValues);
